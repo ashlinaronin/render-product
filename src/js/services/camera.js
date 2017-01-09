@@ -1,8 +1,8 @@
 const cameraParams = {
-    fov: 90,
+    fov: 45,
     aspect: window.innerWidth / window.innerHeight,
-    near: 10,
-    far: 10000
+    near: 1,
+    far: 1000
 };
 
 let cameraPromise = new Promise(function(resolve, reject) {
@@ -12,7 +12,7 @@ let cameraPromise = new Promise(function(resolve, reject) {
         cameraParams.near,
         cameraParams.far
     );
-    camera.position.z = 300;
+    camera.position.z = 5;
     resolve(camera);
 });
 
