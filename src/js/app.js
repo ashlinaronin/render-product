@@ -1,3 +1,3 @@
-(function() {
-    console.log('loading...');
-})();
+import { initializeScene } from './scene';
+
+initializeScene();

@@ -6,7 +6,7 @@ var browserSync = require('browser-sync');
 var del = require('del');
 
 var paths = {
-    mainScripts: 'src/js/*.js',
+    mainScripts: 'src/js/**/*.js',
     sass: 'src/sass/*.scss',
     html: 'src/*.html',
     images: 'app/assets/images/**/*',
@@ -56,7 +56,16 @@ gulp.task('dev:main-scripts', function() {
     return gulp.src(paths.mainScripts)
         .pipe($.plumber())
         .pipe($.sourcemaps.init())
-        .pipe($.concat('main.js'))
+        .pipe($.rollup({
+            'format': 'iife',
+            'plugins': [
+                require('rollup-plugin-babel')({
+                    'presets': [['es2015', { 'modules': false }]],
+                    'plugins': ['external-helpers']
+                })
+            ],
+            entry: 'src/js/app.js'
+        }))
         .pipe($.sourcemaps.write())
         .pipe(gulp.dest('dist/js'))
         .pipe(reload({stream: true}));
