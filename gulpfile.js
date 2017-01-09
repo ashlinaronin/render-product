@@ -12,7 +12,9 @@ var paths = {
     images: 'app/assets/images/**/*',
     libScripts: [
         'node_modules/three/build/three.js',
-        'lib/three-obj-loader.js'
+        'lib/three-obj-loader.js',
+        'node_modules/es6-promise/dist/es6-promise.auto.js',
+        'node_modules/fetch-ie8/fetch.js'
     ],
     assets: 'src/assets/**/*.*'
 };

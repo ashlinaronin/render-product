@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "es6-promise": "^4.0.5",
+    "fetch-ie8": "^1.4.3",
     "three": "^0.83.0"
   },
   "devDependencies": {
