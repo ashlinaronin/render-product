@@ -1,5 +1,3 @@
-//TODO: figure out why libs.js is so much bigger than the two files ostensibly in it...
-
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
