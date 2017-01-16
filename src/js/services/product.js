@@ -9,8 +9,8 @@ let productPromise = new Promise(function(resolve, reject) {
 
         getProductDetails()
             .then(details => {
-                const firstProduct = details[0];
-                resolve(createProduct(firstProduct));
+                const newestProduct = details[details.length-1];
+                resolve(createProduct(newestProduct));
             })
             .catch(console.error);
     });
