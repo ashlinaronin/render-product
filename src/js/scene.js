@@ -9,6 +9,7 @@ let components = {
 
 function animate() {
     window.requestAnimationFrame(animate);
+    components.controls.update();
     components.renderer.render(components.scene, components.camera);
 }
 
@@ -33,7 +34,12 @@ export function initializeScene() {
             components.scene.add(components.product);
 
             let sceneDiv = document.getElementsByClassName('scene')[0];
-            sceneDiv.appendChild(renderer.domElement);
+            sceneDiv.appendChild(components.renderer.domElement);
+
+            components.controls = new THREE.OrbitControls( components.camera, components.renderer.domElement );
+            components.controls.enableDamping = true;
+            components.controls.dampingFactor = 0.25;
+            components.controls.enableZoom = false;
 
             window.addEventListener('resize', onWindowResize);
 
