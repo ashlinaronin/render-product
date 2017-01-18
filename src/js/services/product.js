@@ -27,15 +27,11 @@ function createProduct(productDetails) {
         const assetPath = getAssetPath(productDetails.shape);
 
         objLoader.load(assetPath, object => {
-            object.traverse(child => {
-                if (child instanceof THREE.Mesh) {
-                    child.material = productMaterial;
-                }
-            });
+            setObjectMaterial(object, productMaterial);
             object.position.y = -1.35;
             object.name = productDetails.shape;
             resolve(object);
-        });
+        }, console.log, reject);
     });
 }
 
@@ -43,6 +39,21 @@ function getAssetPath(productName) {
     return `assets/${productName}.obj`;
 }
 
+function setObjectMaterial(object, newMaterial) {
+    object.traverse(child => {
+        if (child instanceof THREE.Mesh) {
+            child.material = newMaterial;
+        }
+    });
+}
+
 export function getProduct() {
     return productPromise;
+}
+
+export function setProductMaterial(newMaterial) {
+    return getProduct().then(product => {
+        setObjectMaterial(product, newMaterial);
+        newMaterial.needsUpdate = true;
+    });
 }
