@@ -1,24 +1,23 @@
 import { getLoadingManager } from './loading-manager';
 
-
 const apiBaseUrl = 'https://www.googleapis.com/customsearch/v1?';
-let queryParams = {
-    key: 'AIzaSyDB5cOgPfH_VSA7yRcHiF3MGba4Wx_2a7c',
-    cx: '014144397479220879650:sd7rzvq2hog',
-    num: 1,
-    fields: 'items(link,snippet)',
-    searchType: 'image',
-    fileType: 'jpg',
-    imgSize: 'medium',
-    alt: 'json',
-    imgType: 'clipart'
-};
+let queryParams = new Map([
+    ['key', 'AIzaSyDB5cOgPfH_VSA7yRcHiF3MGba4Wx_2a7c'],
+    ['cx', '014144397479220879650:sd7rzvq2hog'],
+    ['num', 1],
+    ['fields', 'items(link,snippet)'],
+    ['searchType', 'image'],
+    ['fileType', 'jpg'],
+    ['imgSize', 'medium'],
+    ['alt', 'json'],
+    ['imgType', 'clipart']
+]);
 
 function constructQueryParams(params) {
     let encodedParams = '';
 
-    for (let key of params) {
-        encodedParams += `${key}=${queryParams[key]}&`;
+    for (let [paramName, paramValue] of params) {
+        encodedParams += `${paramName}=${paramValue}&`;
     }
 
     return encodedParams;
