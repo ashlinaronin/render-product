@@ -17,7 +17,7 @@ let queryParams = {
 function constructQueryParams(params) {
     let encodedParams = '';
 
-    for (let key in params) {
+    for (let key of params) {
         encodedParams += `${key}=${queryParams[key]}&`;
     }
 
