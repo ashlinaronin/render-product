@@ -1,4 +1,4 @@
-const apiBaseUrl = 'http://localhost:2000';
+const apiBaseUrl = 'http://192.168.0.124:2000';
 
 export function getProductDetails(phoneNumber = '+15093414961') {
     return new Promise(function (resolve, reject) {
