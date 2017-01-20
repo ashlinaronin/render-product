@@ -1,48 +1,60 @@
 import { getLoadingManager } from './loading-manager';
 import { getProductDetails } from './product-details';
 
-let objLoader;
+const ASSET_BASE_PATH = 'assets/';
+
+let objLoader, mtlLoader;
 
 let productPromise = new Promise(function(resolve, reject) {
     getLoadingManager().then(manager => {
         objLoader = new THREE.OBJLoader(manager);
+        mtlLoader = new THREE.MTLLoader(manager);
 
         getProductDetails()
             .then(details => {
                 const newestProduct = details[details.length-1];
                 resolve(createProduct(newestProduct));
             })
-            .catch(console.error);
+            .catch(reject);
     });
 });
 
-function createProduct(productDetails) {
-    return new Promise(function(resolve, reject) {
-        const productMaterial = new THREE.MeshLambertMaterial({
-            color: productDetails.color,
-            emissive: 0x000000,
-            side: THREE.FrontSide
+function createProduct(details) {
+    return loadMTL(details.shape)
+        .then(materials => {
+            return loadOBJ(details.shape, materials);
         });
+}
 
-        const assetPath = getAssetPath(productDetails.shape);
+function loadOBJ(shape, materials) {
+    return new Promise(function(resolve, reject) {
+        if (materials) {
+            objLoader.setMaterials(materials);
+        }
 
-        objLoader.load(assetPath, object => {
-            setObjectMaterial(object, productMaterial);
-            object.position.y = -1.35;
-            object.name = productDetails.shape;
+        objLoader.setPath(ASSET_BASE_PATH);
+        objLoader.load(`${shape}.obj`, object => {
+            object.name = shape;
             resolve(object);
         }, console.log, reject);
     });
 }
 
-function getAssetPath(productName) {
-    return `assets/${productName}.obj`;
+function loadMTL(shape) {
+    return new Promise(function(resolve, reject) {
+        mtlLoader.setPath(ASSET_BASE_PATH);
+        mtlLoader.load(`${shape}.mtl`, materials => {
+            materials.preload();
+            resolve(materials);
+        }, console.log, reject);
+    });
 }
 
 function setObjectMaterial(object, newMaterial) {
     object.traverse(child => {
         if (child instanceof THREE.Mesh) {
             child.material = newMaterial;
+            child.material.needsUpdate = true;
         }
     });
 }
