@@ -137,6 +137,7 @@ gulp.task('serve', [
         gulp.watch(paths.sass, ['dev:styles']);
         gulp.watch(paths.mainScripts, ['dev:main-scripts']);
         gulp.watch(paths.html, ['dev:html']);
+        gulp.watch(paths.assets, ['dev:assets']);
     });
 
 
