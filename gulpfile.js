@@ -7,7 +7,7 @@ var paths = {
     mainScripts: 'src/js/**/*.js',
     sass: 'src/sass/*.scss',
     html: 'src/*.html',
-    images: 'app/assets/images/**/*',
+    images: 'src/img/*.*',
     libScripts: [
         'node_modules/three/build/three.js',
         'lib/*.js',
@@ -43,7 +43,7 @@ gulp.task('dev:images', function() {
             // as hooks for embedding and styling
             svgoPlugins: [{cleanupIDs: false}]
         })))
-        .pipe(gulp.dest('dist/images'));
+        .pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('dev:assets', function() {

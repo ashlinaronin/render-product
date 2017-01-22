@@ -46,7 +46,7 @@ function onProgress(xhr) {
     console.log(`${ xhr.loaded / xhr.total * 100 }% loaded`);
 }
 
-function loadImageToTexture(imageUrl) {
+export function loadImageToTexture(imageUrl) {
     return new Promise(function (resolve, reject) {
         getLoadingManager()
             .then(loadingManager => {

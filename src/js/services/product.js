@@ -1,5 +1,6 @@
 import { getLoadingManager } from './loading-manager';
 import { getProductDetails } from './product-details';
+import { loadImageToTexture } from './image-utils';
 
 const ASSET_BASE_PATH = 'assets/';
 
@@ -21,9 +22,8 @@ let productPromise = new Promise(function(resolve, reject) {
 
 function createProduct(details) {
     return loadMTL(details.shape)
-        .then(materials => {
-            return loadOBJ(details.shape, materials);
-        });
+        .then(materials => loadOBJ(details.shape, materials))
+        .then(obj => setCustomMap(obj, details.customRegion, details.imageUrl));
 }
 
 function loadOBJ(shape, materials) {
@@ -35,6 +35,8 @@ function loadOBJ(shape, materials) {
         objLoader.setPath(ASSET_BASE_PATH);
         objLoader.load(`${shape}.obj`, object => {
             object.name = shape;
+            window.product = object;
+
             resolve(object);
         }, console.log, reject);
     });
@@ -50,22 +52,22 @@ function loadMTL(shape) {
     });
 }
 
-function setObjectMaterial(object, newMaterial) {
-    object.traverse(child => {
-        if (child instanceof THREE.Mesh) {
-            child.material = newMaterial;
-            child.material.needsUpdate = true;
-        }
-    });
+
+function setCustomMap(obj, regionName, imageUrl) {
+    return loadImageToTexture(imageUrl)
+        .then(texture => {
+            obj.traverse(child => {
+                if (child instanceof THREE.Mesh) {
+                    let multiMaterial = child.material;
+                    let regionMaterial = multiMaterial.materials.find(m => m.name === regionName);
+                    regionMaterial.map = texture;
+                    regionMaterial.needsUpdate = true;
+                }
+            });
+            return Promise.resolve(obj);
+        });
 }
 
 export function getProduct() {
     return productPromise;
-}
-
-export function setProductMaterial(newMaterial) {
-    return getProduct().then(product => {
-        setObjectMaterial(product, newMaterial);
-        newMaterial.needsUpdate = true;
-    });
 }
