@@ -9,11 +9,6 @@ let components = {
 
 function animate() {
     window.requestAnimationFrame(animate);
-
-    let timer = -0.0002 * Date.now();
-    components.pointLight.position.x = 1700 * Math.cos( timer );
-    components.pointLight.position.z = 1700 * Math.sin( timer );
-
     components.controls.update();
     components.renderer.render(components.scene, components.camera);
 }
@@ -33,17 +28,14 @@ function initializeControls() {
     components.controls.enableZoom = false;
 }
 
+
 export function initializeScene() {
-    Promise.all([getCamera(), getLights(), getRenderer(), getProduct()])
-        .then(([camera, lights, renderer, product]) => {
-            components.camera = camera;
-            components.lights = lights;
-            components.renderer = renderer;
-            components.product = product;
+    Promise.all([ getCamera(), getLights(), getRenderer(), getProduct() ])
+        .then(([ camera, lights, renderer, product ]) => {
+            Object.assign(components, { camera, lights, renderer, product });
 
             components.scene.add(components.camera);
             components.lights.forEach(light => components.scene.add(light));
-            components.pointLight = components.lights.find(light => light.type === "PointLight");
             components.scene.add(components.product);
 
             let sceneDiv = document.getElementsByClassName('scene')[0];
