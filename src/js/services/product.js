@@ -3,6 +3,7 @@ import { getProductDetails } from './product-details';
 import { loadImageToTexture } from './image-utils';
 
 const ASSET_BASE_PATH = 'assets/';
+const IMAGE_BASE_URL = 'http://localhost:2000/';
 
 let objLoader, mtlLoader;
 
@@ -23,7 +24,10 @@ let productPromise = new Promise(function(resolve, reject) {
 function createProduct(details) {
     return loadMTL(details.shape)
         .then(materials => loadOBJ(details.shape, materials))
-        .then(obj => setCustomMap(obj, details.customRegion, details.imageUrl));
+        .then(obj => {
+            const absoluteImageUrl = IMAGE_BASE_URL + details.imageUrl;
+            return setCustomMap(obj, details.customRegion, absoluteImageUrl);
+        });
 }
 
 function loadOBJ(shape, materials) {
