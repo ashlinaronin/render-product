@@ -2,6 +2,7 @@ import { getCamera } from './services/camera';
 import { getLights } from './services/lights';
 import { getRenderer } from './services/renderer';
 import { getProduct } from './services/product';
+import { getBackdrop } from './services/backdrop';
 
 let components = {
     scene: new THREE.Scene()
@@ -30,9 +31,11 @@ function initializeControls() {
 
 
 export function initializeScene() {
-    Promise.all([ getCamera(), getLights(), getRenderer(), getProduct() ])
-        .then(([ camera, lights, renderer, product ]) => {
-            Object.assign(components, { camera, lights, renderer, product });
+    Promise.all([ getCamera(), getLights(), getRenderer(), getProduct(), getBackdrop() ])
+        .then(([ camera, lights, renderer, product, backdrop ]) => {
+            Object.assign(components, { camera, lights, renderer, product, backdrop });
+
+            components.scene.add(components.backdrop);
 
             components.scene.add(components.camera);
             components.lights.forEach(light => components.scene.add(light));
