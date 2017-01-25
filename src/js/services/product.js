@@ -1,6 +1,7 @@
 import { getLoadingManager } from './loading-manager';
 import { getProductDetails } from './product-details';
 import { loadImageToTexture } from './image-utils';
+import { getQueryParam } from './routing';
 
 const ASSET_BASE_PATH = 'assets/';
 const IMAGE_BASE_URL = 'http://localhost:2000/';
@@ -12,22 +13,38 @@ let productPromise = new Promise(function(resolve, reject) {
         objLoader = new THREE.OBJLoader(manager);
         mtlLoader = new THREE.MTLLoader(manager);
 
+        let debugOverride = getQueryParam('shape');
+
+        if (debugOverride) {
+            const mockProduct = {
+                shape: debugOverride,
+                customRegion: 'base',
+                imageUrl: ''
+            };
+
+            resolve(createProductWithoutMaterials(mockProduct));
+        }
+
         getProductDetails()
             .then(details => {
                 const newestProduct = details[details.length-1];
-                resolve(createProduct(newestProduct));
+                resolve(createProductWithMaterials(newestProduct));
             })
             .catch(reject);
     });
 });
 
-function createProduct(details) {
+function createProductWithMaterials(details) {
     return loadMTL(details.shape)
         .then(materials => loadOBJ(details.shape, materials))
         .then(obj => {
             const absoluteImageUrl = IMAGE_BASE_URL + details.imageUrl;
             return setCustomMap(obj, details.customRegion, absoluteImageUrl);
         });
+}
+
+function createProductWithoutMaterials(details) {
+    return loadOBJ(details.shape);
 }
 
 function loadOBJ(shape, materials) {
