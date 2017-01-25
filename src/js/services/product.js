@@ -6,35 +6,55 @@ import { getQueryParam } from './routing';
 const ASSET_BASE_PATH = 'assets/';
 const IMAGE_BASE_URL = 'http://localhost:2000/';
 
-let objLoader, mtlLoader;
-
 let productPromise = new Promise(function(resolve, reject) {
-    getLoadingManager().then(manager => {
-        objLoader = new THREE.OBJLoader(manager);
-        mtlLoader = new THREE.MTLLoader(manager);
+    let debugOverride = getQueryParam('shape');
 
-        let debugOverride = getQueryParam('shape');
+    if (debugOverride) {
+        const mockProduct = {
+            shape: debugOverride,
+            customRegion: 'base',
+            imageUrl: ''
+        };
+        resolve(loadProductWithMaterials(mockProduct));
 
-        if (debugOverride) {
-            const mockProduct = {
-                shape: debugOverride,
-                customRegion: 'base',
-                imageUrl: ''
-            };
-
-            resolve(createProductWithoutMaterials(mockProduct));
-        }
-
+    } else {
         getProductDetails()
             .then(details => {
                 const newestProduct = details[details.length-1];
-                resolve(createProductWithMaterials(newestProduct));
+                resolve(loadProductWithMaterials(newestProduct));
             })
             .catch(reject);
-    });
+    }
 });
 
-function createProductWithMaterials(details) {
+function getObjLoader() {
+    return getLoadingManager()
+        .then(manager => new THREE.OBJLoader(manager));
+}
+
+function getMtlLoader() {
+    return getLoadingManager()
+        .then(manager => new THREE.MTLLoader(manager));
+}
+
+function loadProductFromJson(details) {
+    return new Promise(function(resolve, reject) {
+        let loader = new THREE.JSONLoader();
+        loader.load(`assets/${details.shape}.json`, (geometry, materials) => {
+
+            let mesh = new THREE.Mesh(geometry, new THREE.MultiMaterial(materials));
+            resolve(mesh);
+
+        }, console.log, reject);
+    });
+}
+
+export function loadProductWithMaterials(details) {
+    return loadMTL(details.shape)
+        .then(materials => loadOBJ(details.shape, materials));
+}
+
+function loadProductWithMaterialsAndCustomMap(details) {
     return loadMTL(details.shape)
         .then(materials => loadOBJ(details.shape, materials))
         .then(obj => {
@@ -43,33 +63,38 @@ function createProductWithMaterials(details) {
         });
 }
 
-function createProductWithoutMaterials(details) {
+function loadProductWithoutMaterials(details) {
     return loadOBJ(details.shape);
 }
 
 function loadOBJ(shape, materials) {
     return new Promise(function(resolve, reject) {
-        if (materials) {
-            objLoader.setMaterials(materials);
-        }
+        getObjLoader().then(objLoader => {
+            if (materials) {
+                objLoader.setMaterials(materials);
+            }
 
-        objLoader.setPath(ASSET_BASE_PATH);
-        objLoader.load(`${shape}.obj`, object => {
-            object.name = shape;
-            window.product = object;
-
-            resolve(object);
-        }, console.log, reject);
+            objLoader.setPath(ASSET_BASE_PATH);
+            objLoader.load(`${shape}.obj`, object => {
+                object.name = shape;
+                object.position.y = -5;
+                resolve(object);
+            }, console.log, reject);
+        });
     });
 }
 
 function loadMTL(shape) {
     return new Promise(function(resolve, reject) {
-        mtlLoader.setPath(ASSET_BASE_PATH);
-        mtlLoader.load(`${shape}.mtl`, materials => {
-            materials.preload();
-            resolve(materials);
-        }, console.log, reject);
+        getMtlLoader().then(mtlLoader => {
+            mtlLoader.setPath(ASSET_BASE_PATH);
+            mtlLoader.load(`${shape}.mtl`, materials => {
+                materials.preload();
+                resolve(materials);
+            }, console.log, reject);
+
+        });
+
     });
 }
 

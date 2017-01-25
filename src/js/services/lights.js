@@ -1,7 +1,11 @@
 let lightsPromise = new Promise(function(resolve, reject) {
-    const pointLight = new THREE.PointLight(0xffffff, 0.8);
-    const ambientLight = new THREE.AmbientLight(0x404040, 5);
-    resolve([pointLight, ambientLight]);
+    const leftPoint = new THREE.PointLight(0xffffff, 1.4);
+    leftPoint.position.set(-10, 5, -2);
+
+    const rightPoint = new THREE.PointLight(0xffffff, 1.4);
+    rightPoint.position.set(10, 5, -2);
+
+    resolve([leftPoint, rightPoint]);
 });
 
 export function getLights() {
