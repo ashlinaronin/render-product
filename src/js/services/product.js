@@ -13,10 +13,9 @@ let productPromise = new Promise(function(resolve, reject) {
     if (debugOverride) {
         const mockProduct = {
             shape: debugOverride,
-            customRegion: 'Material__3',
             imageUrl: 'img/poop.jpg'
         };
-        resolve(loadProductWithMaterials(mockProduct));
+        resolve(loadProductWithMaterialsAndCustomMap(mockProduct));
 
     } else {
         getProductDetails()
@@ -59,8 +58,12 @@ function loadProductWithMaterialsAndCustomMap(details) {
     return loadMTL(details.shape)
         .then(materials => loadOBJ(details.shape, materials))
         .then(obj => {
+            let metadata = getMetadata(details.shape);
+
+            if (!metadata.customRegion) return Promise.resolve(obj);
+
             const absoluteImageUrl = IMAGE_BASE_URL + details.imageUrl;
-            return setCustomMap(obj, details.customRegion, absoluteImageUrl);
+            return setCustomMap(obj, metadata.customRegion, absoluteImageUrl);
         });
 }
 
@@ -113,12 +116,28 @@ function loadMTL(shape) {
 
 
 function setCustomMap(obj, regionName, imageUrl) {
+    // TODO: refactor
     return loadImageToTexture(imageUrl)
         .then(texture => {
             let region = obj.children.find(r => r.material.name === regionName);
+            let customMaterial;
 
-            region.material.map = texture;
-            region.material.needsUpdate = true;
+            if (typeof region === 'undefined') {
+                obj.children.forEach(child => {
+                    if (child.material.type === 'MultiMaterial') {
+                        customMaterial = child.material.materials.find(m => m.name === regionName);
+                    } else if (child.material.name === regionName) {
+                        customMaterial = child.material;
+                    }
+                });
+            } else {
+                customMaterial = region.material;
+            }
+
+            if (customMaterial) {
+                customMaterial.map = texture;
+                customMaterial.needsUpdate = true;
+            }
 
             return Promise.resolve(obj);
         });
