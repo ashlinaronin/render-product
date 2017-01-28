@@ -48,14 +48,16 @@ const metadata = {
         rotation: new THREE.Euler(0, 0, 0)
     },
     massager: {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(0.8, 0.8, 0.8),
-        rotation: new THREE.Euler(0, 0, 0)
+        position: new THREE.Vector3(0, 1, 0),
+        scale: new THREE.Vector3(1.5, 1.5, 1.5),
+        rotation: new THREE.Euler(0, 0, 0),
+        customRegion: 'base'
     },
     mug: {
         position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(1.5, 1.5, 1.5),
-        rotation: new THREE.Euler(0, 90 * Math.PI/180, 0)
+        scale: new THREE.Vector3(2.0, 2.0, 2.0),
+        rotation: new THREE.Euler(0, 90 * Math.PI/180, 0),
+        customRegion: 'wire_176026026'
     },
     phonecase: {
         position: new THREE.Vector3(0, 0, 0),
@@ -71,7 +73,8 @@ const metadata = {
     snuggie_alternate: {
         position: new THREE.Vector3(0, -9, 0),
         scale: new THREE.Vector3(0.25, 0.25, 0.25),
-        rotation: new THREE.Euler(0, 0, 0)
+        rotation: new THREE.Euler(0, 0, 0),
+        customRegion: '01___Default'
     },
     tshirt: {
         position: new THREE.Vector3(0, 0, 0),

@@ -59,7 +59,6 @@ function loadProductWithMaterialsAndCustomMap(details) {
         .then(materials => loadOBJ(details.shape, materials))
         .then(obj => {
             let metadata = getMetadata(details.shape);
-
             if (!metadata.customRegion) return Promise.resolve(obj);
 
             const absoluteImageUrl = IMAGE_BASE_URL + details.imageUrl;
@@ -108,9 +107,7 @@ function loadMTL(shape) {
                 materials.preload();
                 resolve(materials);
             }, console.log, reject);
-
         });
-
     });
 }
 
@@ -135,12 +132,16 @@ function setCustomMap(obj, regionName, imageUrl) {
             }
 
             if (customMaterial) {
-                customMaterial.map = texture;
-                customMaterial.needsUpdate = true;
+                updateMap(customMaterial, texture);
             }
 
             return Promise.resolve(obj);
         });
+}
+
+function updateMap(material, texture) {
+    material.map = texture;
+    material.needsUpdate = true;
 }
 
 export function getProduct() {
