@@ -93,6 +93,26 @@ gulp.task('prod:lib-scripts', function(){
         .pipe(reload({stream: true}));
 });
 
+gulp.task('prod:main-scripts', function() {
+    return gulp.src(paths.mainScripts)
+        .pipe($.plumber())
+        .pipe($.sourcemaps.init())
+        .pipe($.rollup({
+            'format': 'iife',
+            'plugins': [
+                require('rollup-plugin-babel')({
+                    'presets': [['es2015', { 'modules': false }]],
+                    'plugins': ['external-helpers']
+                })
+            ],
+            entry: 'src/js/app.js'
+        }))
+        .pipe($.uglify())
+        .pipe($.sourcemaps.write())
+        .pipe(gulp.dest('dist/js'))
+        .pipe(reload({stream: true}));
+});
+
 gulp.task('dev:html', function(){
     return gulp.src(paths.html)
         .pipe(gulp.dest('dist'))
@@ -149,4 +169,4 @@ gulp.task('default', ['clean'], function(){
     gulp.start('serve');
 });
 
-gulp.task('prod', ['prod:lib-scripts', 'dev:styles', 'dev:images', 'dev:main-scripts', 'dev:html']);
+gulp.task('prod', ['prod:lib-scripts', 'dev:styles', 'dev:images', 'prod:main-scripts', 'dev:html']);
