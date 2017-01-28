@@ -13,7 +13,7 @@ let cameraPromise = new Promise(function(resolve, reject) {
         cameraParams.far
     );
 
-    camera.position.set(8, 15, 20);
+    camera.position.set(10, 15, 25);
     resolve(camera);
 });
 
