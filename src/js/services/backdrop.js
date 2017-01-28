@@ -5,8 +5,5 @@ export function getBackdrop() {
         shape: 'backdrop'
     };
 
-    return loadProductWithMaterials(backdrop).then(obj => {
-        obj.position.y = -7;
-        return obj;
-    });
+    return loadProductWithMaterials(backdrop);
 }

@@ -2,6 +2,7 @@ import { getLoadingManager } from './loading-manager';
 import { getProductDetails } from './product-details';
 import { loadImageToTexture } from './image-utils';
 import { getQueryParam } from './routing';
+import { getMetadata } from './product-metadata';
 
 const ASSET_BASE_PATH = 'assets/';
 const IMAGE_BASE_URL = 'http://localhost:4000/';
@@ -77,11 +78,23 @@ function loadOBJ(shape, materials) {
             objLoader.setPath(ASSET_BASE_PATH);
             objLoader.load(`${shape}.obj`, object => {
                 object.name = shape;
-                object.position.y = -5;
+                adjustObjectPositionAndScale(object);
                 resolve(object);
             }, console.log, reject);
         });
     });
+}
+
+function adjustObjectPositionAndScale(object) {
+    const metadata = getMetadata(object.name);
+    if (metadata) {
+        object.position.copy(metadata.position);
+        object.scale.copy(metadata.scale);
+        object.rotation.copy(metadata.rotation);
+        window.object = object;
+    }
+
+    return object;
 }
 
 function loadMTL(shape) {

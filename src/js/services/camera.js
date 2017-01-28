@@ -12,7 +12,8 @@ let cameraPromise = new Promise(function(resolve, reject) {
         cameraParams.near,
         cameraParams.far
     );
-    camera.position.z = 25;
+
+    camera.position.set(8, 15, 20);
     resolve(camera);
 });
 

@@ -5,7 +5,10 @@ let lightsPromise = new Promise(function(resolve, reject) {
     const rightPoint = new THREE.PointLight(0xffffff, 1.4, 100, 2);
     rightPoint.position.set(15, 5, 10);
 
-    resolve([leftPoint, rightPoint]);
+    const centerPoint = new THREE.PointLight(0xffffff, 0.35, 100, 2);
+    centerPoint.position.set(0, 5, 0);
+
+    resolve([leftPoint, rightPoint, centerPoint]);
 });
 
 export function getLights() {
