@@ -4,7 +4,7 @@ import { loadImageToTexture } from './image-utils';
 import { getQueryParam } from './routing';
 
 const ASSET_BASE_PATH = 'assets/';
-const IMAGE_BASE_URL = 'http://localhost:2000/';
+const IMAGE_BASE_URL = 'http://localhost:4000/';
 
 let productPromise = new Promise(function(resolve, reject) {
     let debugOverride = getQueryParam('shape');
@@ -12,8 +12,8 @@ let productPromise = new Promise(function(resolve, reject) {
     if (debugOverride) {
         const mockProduct = {
             shape: debugOverride,
-            customRegion: 'base',
-            imageUrl: ''
+            customRegion: 'Material__3',
+            imageUrl: 'img/poop.jpg'
         };
         resolve(loadProductWithMaterials(mockProduct));
 
@@ -102,14 +102,11 @@ function loadMTL(shape) {
 function setCustomMap(obj, regionName, imageUrl) {
     return loadImageToTexture(imageUrl)
         .then(texture => {
-            obj.traverse(child => {
-                if (child instanceof THREE.Mesh) {
-                    let multiMaterial = child.material;
-                    let regionMaterial = multiMaterial.materials.find(m => m.name === regionName);
-                    regionMaterial.map = texture;
-                    regionMaterial.needsUpdate = true;
-                }
-            });
+            let region = obj.children.find(r => r.material.name === regionName);
+
+            region.material.map = texture;
+            region.material.needsUpdate = true;
+
             return Promise.resolve(obj);
         });
 }
