@@ -1,8 +1,8 @@
 const apiBaseUrl = 'http://192.168.0.124:2000';
 
-export function getProductDetails(phoneNumber = '+15093414961') {
+export function getProductDetails(readableId = '36eb83') {
     return new Promise(function (resolve, reject) {
-        fetch(`${apiBaseUrl}/product-details/${phoneNumber}`)
+        fetch(`${apiBaseUrl}/product-details/${readableId}`)
             .then(response => {
                 if (response.status !== 200) {
                     reject(new Error('Product details: server error'));
