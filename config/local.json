@@ -1,0 +1,7 @@
+{
+    "config" : {
+        "ASSET_BASE_PATH": "assets/",
+        "IMAGE_BASE_URL": "http://localhost:4000/",
+        "API_BASE_URL": "http://192.168.0.124:2000"
+    }
+}

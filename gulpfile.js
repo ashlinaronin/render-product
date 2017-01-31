@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var del = require('del');
+var replace = require('gulp-token-replace'); // dunno why gulp-load-plugins doesn't get it
 
 var paths = {
     mainScripts: 'src/js/**/*.js',
@@ -56,6 +57,7 @@ gulp.task('dev:main-scripts', function() {
     return gulp.src(paths.mainScripts)
         .pipe($.plumber())
         .pipe($.sourcemaps.init())
+        .pipe(replace({ global: require('./config/local.json') }))
         .pipe($.rollup({
             'format': 'iife',
             'plugins': [
@@ -97,6 +99,7 @@ gulp.task('prod:main-scripts', function() {
     return gulp.src(paths.mainScripts)
         .pipe($.plumber())
         .pipe($.sourcemaps.init())
+        .pipe(replace({ global: require('./config/production.json') }))
         .pipe($.rollup({
             'format': 'iife',
             'plugins': [
@@ -118,6 +121,20 @@ gulp.task('dev:html', function(){
         .pipe(gulp.dest('dist'))
         .pipe(reload({stream: true}));
 });
+
+// gulp.task('dev:replace', function(){
+//     var configFile = require('./config/local.json');
+//     return gulp.src(paths.mainScripts)
+//         .pipe(replace({ global: configFile }))
+//         .pipe(gulp.dest('dist/'));
+// });
+//
+// gulp.task('prod:replace', function(){
+//     var configFile = require('./config/prod.json');
+//     return gulp.src(paths.mainScripts)
+//         .pipe(replace({global:configFile}))
+//         .pipe(gulp.dest('dist/'));
+// });
 
 
 function lint(files, options) {

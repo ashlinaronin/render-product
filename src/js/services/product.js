@@ -3,9 +3,7 @@ import { getProductDetails } from './product-details';
 import { loadImageToTexture } from './image-utils';
 import { getQueryParam } from './routing';
 import { getMetadata } from './product-metadata';
-
-const ASSET_BASE_PATH = 'assets/';
-const IMAGE_BASE_URL = 'http://localhost:4000/';
+import config from './config';
 
 let productPromise = new Promise(function(resolve, reject) {
     let debugOverride = getQueryParam('shape');
@@ -20,8 +18,7 @@ let productPromise = new Promise(function(resolve, reject) {
     } else {
         getProductDetails()
             .then(details => {
-                const newestProduct = details[details.length-1];
-                resolve(loadProductWithMaterials(newestProduct));
+                resolve(loadProductWithMaterials(details));
             })
             .catch(reject);
     }
@@ -61,7 +58,7 @@ function loadProductWithMaterialsAndCustomMap(details) {
             let metadata = getMetadata(details.shape);
             if (!metadata.customRegion) return Promise.resolve(obj);
 
-            const absoluteImageUrl = IMAGE_BASE_URL + details.imageUrl;
+            const absoluteImageUrl = config.IMAGE_BASE_URL + details.imageUrl;
             return setCustomMap(obj, metadata.customRegion, absoluteImageUrl);
         });
 }
@@ -77,7 +74,7 @@ function loadOBJ(shape, materials) {
                 objLoader.setMaterials(materials);
             }
 
-            objLoader.setPath(ASSET_BASE_PATH);
+            objLoader.setPath(config.ASSET_BASE_PATH);
             objLoader.load(`${shape}.obj`, object => {
                 object.name = shape;
                 adjustObjectPositionAndScale(object);
@@ -102,7 +99,7 @@ function adjustObjectPositionAndScale(object) {
 function loadMTL(shape) {
     return new Promise(function(resolve, reject) {
         getMtlLoader().then(mtlLoader => {
-            mtlLoader.setPath(ASSET_BASE_PATH);
+            mtlLoader.setPath(config.ASSET_BASE_PATH);
             mtlLoader.load(`${shape}.mtl`, materials => {
                 materials.preload();
                 resolve(materials);
@@ -113,7 +110,7 @@ function loadMTL(shape) {
 
 
 function setCustomMap(obj, regionName, imageUrl) {
-    // TODO: refactor
+    // TODO: refactor to two methods -- find material then update map
     return loadImageToTexture(imageUrl)
         .then(texture => {
             let region = obj.children.find(r => r.material.name === regionName);
@@ -140,8 +137,12 @@ function setCustomMap(obj, regionName, imageUrl) {
 }
 
 function updateMap(material, texture) {
-    material.map = texture;
-    material.needsUpdate = true;
+    if (material) {
+        material.map = texture;
+        material.needsUpdate = true;
+    }
+
+    return Promise.resolve();
 }
 
 export function getProduct() {

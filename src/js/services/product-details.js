@@ -1,8 +1,8 @@
-const apiBaseUrl = 'http://192.168.0.124:2000';
+import config from './config';
 
 export function getProductDetails(readableId = '36eb83') {
     return new Promise(function (resolve, reject) {
-        fetch(`${apiBaseUrl}/product-details/${readableId}`)
+        fetch(`${config.API_BASE_URL}/product-details/${readableId}`)
             .then(response => {
                 if (response.status !== 200) {
                     reject(new Error('Product details: server error'));
