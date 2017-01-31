@@ -44,6 +44,8 @@ export function initializeScene() {
             let sceneDiv = document.getElementsByClassName('scene')[0];
             sceneDiv.appendChild(components.renderer.domElement);
 
+            components.renderer.setFaceCulling( THREE.CullFaceNone );
+
             initializeControls(components.product.name);
 
             window.addEventListener('resize', onWindowResize);
