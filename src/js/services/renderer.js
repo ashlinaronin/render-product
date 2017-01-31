@@ -1,5 +1,5 @@
 let rendererPromise = new Promise(function (resolve, reject) {
-    let renderer = new THREE.WebGLRenderer();
+    let renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio( window.devicePixelRatio || 1);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.domElement.setAttribute('id', 'renderer');
