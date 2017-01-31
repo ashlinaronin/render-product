@@ -1,0 +1,52 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 27.01.2017 20:18:57
+
+newmtl wire_113135006
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.4431 0.5294 0.0235
+	Kd 0.4431 0.5294 0.0235
+	Ks 0.3500 0.3500 0.3500
+
+newmtl 09___Default
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka img\basketball-texture.jpg
+	map_Kd img\basketball-texture.jpg
+
+newmtl _basketballinacasewire_135006006
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka img\wood.jpg
+	map_Kd img\wood.jpg
+
+newmtl 08___Default
+	Ns 80.0000
+	Ni 1.5000
+	d 0.4200
+	Tr 0.5800
+	Tf 0.4200 0.4200 0.4200 
+	illum 2
+	Ka 0.2078 0.2078 0.2078
+	Kd 0.2078 0.2078 0.2078
+	Ks 0.3060 0.3060 0.3060
+	Ke 0.0000 0.0000 0.0000
