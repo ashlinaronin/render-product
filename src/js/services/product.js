@@ -18,7 +18,7 @@ let productPromise = new Promise(function(resolve, reject) {
     } else {
         getProductDetails()
             .then(details => {
-                resolve(loadProductWithMaterials(details));
+                resolve(loadProductWithMaterialsAndCustomMap(details));
             })
             .catch(reject);
     }

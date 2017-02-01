@@ -5,6 +5,7 @@ export function loadImageToTexture(imageUrl) {
         getLoadingManager()
             .then(loadingManager => {
                 let textureLoader = new THREE.TextureLoader(loadingManager);
+                textureLoader.crossOrigin = '';
                 textureLoader.load(
                     imageUrl,
                     texture => resolve(texture),
