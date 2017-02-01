@@ -4,6 +4,7 @@ import { getRenderer } from './services/renderer';
 import { getProduct } from './services/product';
 import { getBackdrop } from './services/backdrop';
 import { initializeControls, updateControlsOnResize, rotateObject } from './services/controls';
+import { finishedLoading } from './services/loading-manager';
 
 let components = {
     scene: new THREE.Scene()
@@ -49,6 +50,8 @@ export function initializeScene() {
             initializeControls(components.product.name);
 
             window.addEventListener('resize', onWindowResize);
+
+            finishedLoading();
 
             animate();
         })
