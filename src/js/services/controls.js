@@ -1,6 +1,8 @@
 // adapted from https://github.com/mrdoob/three.js/blob/master/examples/webgl_geometry_text.html
 import { getMetadata } from './product-metadata';
 
+let sceneDiv;
+
 let targetRotation = 0;
 let targetRotationOnMouseDown = 0;
 let mouseX = 0;
@@ -10,9 +12,9 @@ let windowHalfY = window.innerHeight / 2;
 
 function onDocumentMouseDown( event ) {
     event.preventDefault();
-    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-    document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+    sceneDiv.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    sceneDiv.addEventListener( 'mouseup', onDocumentMouseUp, false );
+    sceneDiv.addEventListener( 'mouseout', onDocumentMouseOut, false );
     mouseXOnMouseDown = event.clientX - windowHalfX;
     targetRotationOnMouseDown = targetRotation;
 }
@@ -21,14 +23,14 @@ function onDocumentMouseMove( event ) {
     targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.008;
 }
 function onDocumentMouseUp( event ) {
-    document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-    document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-    document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+    sceneDiv.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+    sceneDiv.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+    sceneDiv.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 }
 function onDocumentMouseOut( event ) {
-    document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-    document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-    document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+    sceneDiv.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+    sceneDiv.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+    sceneDiv.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 }
 function onDocumentTouchStart( event ) {
     if ( event.touches.length == 1 ) {
@@ -41,7 +43,7 @@ function onDocumentTouchMove( event ) {
     if (event.touches.length == 1) {
         event.preventDefault();
         mouseX = event.touches[0].pageX - windowHalfX;
-        targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.005;
+        targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.01;
     }
 }
 
@@ -50,9 +52,11 @@ export function initializeControls(productName) {
     targetRotation = productMetadata.rotation.y;
     targetRotationOnMouseDown = productMetadata.rotation.y;
 
-    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-    document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-    document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+    sceneDiv = document.querySelector('.scene');
+
+    sceneDiv.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    sceneDiv.addEventListener( 'touchstart', onDocumentTouchStart, false );
+    sceneDiv.addEventListener( 'touchmove', onDocumentTouchMove, false );
 }
 
 export function rotateObject(object) {
