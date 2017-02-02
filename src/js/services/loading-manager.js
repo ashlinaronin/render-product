@@ -8,9 +8,20 @@ function onLoadingManagerProgress(item, loaded, total) {
     console.log(item, loaded, total);
 }
 
+
 export function finishedLoading() {
-    const loadingDiv = document.querySelector('.loading');
-    loadingDiv.classList.add('hidden');
+    document.querySelector('.loading').classList.add('hidden');
+}
+
+export function onError() {
+    const loading = document.querySelector('.loading');
+    const scene = document.querySelector('.scene');
+    const error = document.querySelector('.error');
+    const body = document.querySelector('body');
+    body.removeChild(loading);
+    body.removeChild(scene);
+
+    error.classList.remove('hidden');
 }
 
 export function getLoadingManager() {
