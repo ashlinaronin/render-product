@@ -142,6 +142,17 @@ const metadata = {
         rotation: new THREE.Euler(0, 0, 0),
         customRegion: '01___Default'
     },
+    teainfuser: {
+        position: new THREE.Vector3(0, 0, 0),
+        scale: new THREE.Vector3(0.25, 0.25, 0.25),
+        rotation: new THREE.Euler(0, 0, 0),
+    },
+    teainfuserv2: {
+        position: new THREE.Vector3(0, 0, 0),
+        scale: new THREE.Vector3(0.25, 0.25, 0.25),
+        rotation: new THREE.Euler(0, 0, 0),
+        customRegion: '03___Default'
+    },
     tshirt: {
         position: new THREE.Vector3(0, 0, 0),
         scale: new THREE.Vector3(1, 1, 1),

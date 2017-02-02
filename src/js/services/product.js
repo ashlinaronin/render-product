@@ -11,7 +11,7 @@ let productPromise = new Promise(function(resolve, reject) {
     if (debugOverride) {
         const mockProduct = {
             shape: debugOverride,
-            imageUrl: 'img/poop.jpg'
+            imageUrl: 'img/products/Donate-Poop-for-Money.jpg'
         };
         resolve(loadProductWithMaterialsAndCustomMap(mockProduct));
 
@@ -52,8 +52,7 @@ export function loadProductWithMaterials(details) {
 }
 
 function loadProductWithMaterialsAndCustomMap(details) {
-    return loadMTL(details.shape)
-        .then(materials => loadOBJ(details.shape, materials))
+    return loadProductWithMaterials(details)
         .then(obj => {
             let metadata = getMetadata(details.shape);
             if (!metadata.customRegion) return Promise.resolve(obj);
