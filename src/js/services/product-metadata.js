@@ -22,51 +22,17 @@ const metadata = {
         customRegion: 'Material__3'
     },
     basketball_v2: {
-        position: new THREE.Vector3(0, 5, 0),
+        position: new THREE.Vector3(0, 2, 0),
         scale: new THREE.Vector3(1, 1, 1),
         rotation: new THREE.Euler(0, 0, 0),
-        customRegion: 'Material__3'
+        customRegion: '09___Default'
     },
-    birdcage: {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(0.5, 0.5, 0.5),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
+    // good one
     birdcagev2: {
         position: new THREE.Vector3(0, 5, 0),
         scale: new THREE.Vector3(0.5, 0.5, 0.5),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    birdcagev3: {
-        position: new THREE.Vector3(0, 5, 0),
-        scale: new THREE.Vector3(0.5, 0.5, 0.5),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    birdcagev4: {
-        position: new THREE.Vector3(0, 5, 0),
-        scale: new THREE.Vector3(0.5, 0.5, 0.5),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    birdcagev5: {
-        position: new THREE.Vector3(0, 5, 0),
-        scale: new THREE.Vector3(0.5, 0.5, 0.5),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    birdcagev6: {
-        position: new THREE.Vector3(0, 5, 0),
-        scale: new THREE.Vector3(0.5, 0.5, 0.5),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    bubbler: {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(1, 1, 1),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    bubblerv2: {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(2.25, 2.25, 2.25),
         rotation: new THREE.Euler(0, 0, 0),
-        customRegion: 'wire_184228153'
+        customRegion: 'wire_028149177'
     },
     bubblerv3: {
         position: new THREE.Vector3(0, 0, 0),
@@ -74,44 +40,17 @@ const metadata = {
         rotation: new THREE.Euler(0, 0, 0),
         customRegion: '08___Default'
     },
-    carfreshener: {
-        position: new THREE.Vector3(0, 1, 0),
-        scale: new THREE.Vector3(4, 4, 4),
-        rotation: new THREE.Euler(90 * Math.PI / 180, 0, 0, 'YXZ'),
-        customRegion: 'wire_177027088'
-    },
-    choker: {
+    chokerv6: {
         position: new THREE.Vector3(0, 0, 0),
         scale: new THREE.Vector3(1, 1, 1),
-        rotation: new THREE.Euler(0, 0, 0)
+        rotation: new THREE.Euler(0, 0, 0),
+        customRegion: '_chokerv408___Default'
     },
-    choker_v2: {
+    footballv2: {
         position: new THREE.Vector3(0, 0, 0),
         scale: new THREE.Vector3(1, 1, 1),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    footballwithcase: {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(1, 1, 1),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    freshener_v2: {
-        position: new THREE.Vector3(0, 1, 0),
-        scale: new THREE.Vector3(4, 4, 4),
-        rotation: new THREE.Euler(90 * Math.PI / 180, 0, 0, 'YXZ'),
-        customRegion: 'wire_177027088'
-    },
-    freshenerv3: {
-        position: new THREE.Vector3(0, 1, 0),
-        scale: new THREE.Vector3(4, 4, 4),
-        rotation: new THREE.Euler(90 * Math.PI / 180, 0, 0, 'YXZ'),
-        customRegion: 'wire_177027088'
-    },
-    freshenerv4: {
-        position: new THREE.Vector3(0, 1, 0),
-        scale: new THREE.Vector3(4, 4, 4),
-        rotation: new THREE.Euler(90 * Math.PI / 180, 0, 0, 'YXZ'),
-        customRegion: 'wire_177027088'
+        rotation: new THREE.Euler(0, 0, 0),
+        customRegion: '09___Default'
     },
     massager: {
         position: new THREE.Vector3(0, 1, 0),
@@ -121,14 +60,9 @@ const metadata = {
     },
     mug: {
         position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(2.0, 2.0, 2.0),
+        scale: new THREE.Vector3(1.8, 1.8, 1.8),
         rotation: new THREE.Euler(0, 90 * Math.PI/180, 0),
         customRegion: 'wire_176026026'
-    },
-    phonecase: {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(1, 1, 1),
-        rotation: new THREE.Euler(0, 0, 0)
     },
     snuggy: {
         position: new THREE.Vector3(0, 0, 0),
@@ -142,27 +76,17 @@ const metadata = {
         rotation: new THREE.Euler(0, 0, 0),
         customRegion: '01___Default'
     },
-    teainfuser: {
+    't-shirt_v2': {
         position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(0.25, 0.25, 0.25),
+        scale: new THREE.Vector3(0.5, 0.5, 0.5),
         rotation: new THREE.Euler(0, 0, 0),
+        customRegion: '08___Default'
     },
     teainfuserv2: {
         position: new THREE.Vector3(0, 0, 0),
         scale: new THREE.Vector3(0.25, 0.25, 0.25),
         rotation: new THREE.Euler(0, 0, 0),
         customRegion: '03___Default'
-    },
-    tshirt: {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(1, 1, 1),
-        rotation: new THREE.Euler(0, 0, 0)
-    },
-    't-shirt_v2': {
-        position: new THREE.Vector3(0, 0, 0),
-        scale: new THREE.Vector3(0.5, 0.5, 0.5),
-        rotation: new THREE.Euler(0, 0, 0),
-        customRegion: '09___Default'
     }
 };
 

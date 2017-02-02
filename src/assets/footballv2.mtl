@@ -1,52 +1,46 @@
-# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 27.01.2017 20:18:57
-
-newmtl wire_113135006
-	Ns 32
-	d 1
-	Tr 0
-	Tf 1 1 1
-	illum 2
-	Ka 0.4431 0.5294 0.0235
-	Kd 0.4431 0.5294 0.0235
-	Ks 0.3500 0.3500 0.3500
-
-newmtl 09___Default
-	Ns 10.0000
-	Ni 1.5000
-	d 1.0000
-	Tr 0.0000
-	Tf 1.0000 1.0000 1.0000 
-	illum 2
-	Ka 0.5882 0.5882 0.5882
-	Kd 0.5882 0.5882 0.5882
-	Ks 0.0000 0.0000 0.0000
-	Ke 0.0000 0.0000 0.0000
-	map_Ka img\basketball-texture.jpg
-	map_Kd img\basketball-texture.jpg
-
-newmtl _basketballinacasewire_135006006
-	Ns 10.0000
-	Ni 1.5000
-	d 1.0000
-	Tr 0.0000
-	Tf 1.0000 1.0000 1.0000 
-	illum 2
-	Ka 0.5880 0.5880 0.5880
-	Kd 0.5880 0.5880 0.5880
-	Ks 0.0000 0.0000 0.0000
-	Ke 0.0000 0.0000 0.0000
-	map_Ka img\wood.jpg
-	map_Kd img\wood.jpg
+# Blender MTL File: 'None'
+# Material Count: 4
 
 newmtl 08___Default
-	Ns 80.0000
-	Ni 1.5000
-	d 0.4200
-	Tr 0.5800
-	Tf 0.4200 0.4200 0.4200 
-	illum 2
-	Ka 0.2078 0.2078 0.2078
-	Kd 0.2078 0.2078 0.2078
-	Ks 0.3060 0.3060 0.3060
-	Ke 0.0000 0.0000 0.0000
+Ns 78.431373
+Ka 0.207800 0.207800 0.207800
+Kd 0.207800 0.207800 0.207800
+Ks 0.306000 0.306000 0.306000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 0.420000
+illum 2
+
+newmtl 09___Default
+Ns 9.803922
+Ka 0.588200 0.588200 0.588200
+Kd 0.588200 0.588200 0.588200
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd img/basketball-texture.jpg
+map_Ka img/basketball-texture.jpg
+
+newmtl _basketballinacasewire_135006006
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd img/wood.jpg
+map_Ka img/wood.jpg
+
+newmtl wire_113135006
+Ns 31.372549
+Ka 0.332000 0.332000 0.332000
+Kd 0.443100 0.529400 0.023500
+Ks 0.350000 0.350000 0.350000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
