@@ -1,7 +1,7 @@
 {
   "config" : {
     "ASSET_BASE_PATH": "assets/",
-    "IMAGE_BASE_URL": "https://nectar.shop/api/img/products/",
+    "IMAGE_BASE_URL": "https://nectar.shop/api/",
     "API_BASE_URL": "https://nectar.shop/api"
   }
 }
