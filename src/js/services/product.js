@@ -18,11 +18,16 @@ let productPromise = new Promise(function(resolve, reject) {
     } else {
         getProductDetails()
             .then(details => {
+                updatePageTitle(details.shape, details.imageSearchTerm);
                 resolve(loadProductWithMaterialsAndCustomMap(details));
             })
             .catch(reject);
     }
 });
+
+function updatePageTitle(shape, searchTerm) {
+    document.title = `nectar: ${searchTerm} ${shape}`;
+}
 
 function getObjLoader() {
     return getLoadingManager()
