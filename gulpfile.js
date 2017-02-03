@@ -186,4 +186,4 @@ gulp.task('default', ['clean'], function(){
     gulp.start('serve');
 });
 
-gulp.task('prod', ['prod:lib-scripts', 'dev:styles', 'dev:images', 'prod:main-scripts', 'dev:html']);
+gulp.task('prod', ['prod:lib-scripts', 'dev:styles', 'dev:assets', 'dev:images', 'prod:main-scripts', 'dev:html']);
