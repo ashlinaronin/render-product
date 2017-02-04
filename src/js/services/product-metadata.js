@@ -21,7 +21,7 @@ const metadata = {
         rotation: new THREE.Euler(0, 0, 0),
         customRegion: 'Material__3'
     },
-    basketball_v2: {
+    'basketball2.0': {
         position: new THREE.Vector3(0, 2, 0),
         scale: new THREE.Vector3(1, 1, 1),
         rotation: new THREE.Euler(0, 0, 0),
@@ -46,7 +46,7 @@ const metadata = {
         rotation: new THREE.Euler(0, 0, 0),
         customRegion: '_chokerv408___Default'
     },
-    footballv2: {
+    'football2.0': {
         position: new THREE.Vector3(0, 0, 0),
         scale: new THREE.Vector3(1, 1, 1),
         rotation: new THREE.Euler(0, 0, 0),
