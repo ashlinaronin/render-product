@@ -1,7 +1,7 @@
 import { rollup } from 'rollup';
 import babel from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import { execSync } from 'child_process';
 import { mkdirSync, cpSync, readFileSync, writeFileSync, createWriteStream } from 'fs';
 import { createReadStream } from 'fs';
